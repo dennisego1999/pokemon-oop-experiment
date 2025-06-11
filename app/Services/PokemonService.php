@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Api\PokemonApi;
-use App\Dto\Pokemon;
+use App\Dto\PokemonDto;
 use Exception;
 
 class PokemonService {
@@ -26,20 +26,20 @@ class PokemonService {
     {
         $data = $this->api->fetchData("pokemon?limit=$limit&offset=$offset");
 
-        return array_map(fn($pokemon) => Pokemon::fromArray($pokemon), $data['results']);
+        return array_map(fn($pokemon) => PokemonDto::fromArray($pokemon), $data['results']);
     }
 
     /**
      * Retrieves detailed information for a specific Pokémon by its name or ID.
      *
      * @param string|int $identifier The name or ID of the Pokémon to retrieve.
-     * @return Pokemon A Pokémon object containing the detailed data.
+     * @return PokemonDto A Pokémon object containing the detailed data.
      * @throws Exception
      */
-    public function findPokemon(string|int $identifier): Pokemon
+    public function findPokemon(string|int $identifier): PokemonDto
     {
         $data = $this->api->fetchData("pokemon/$identifier");
 
-        return Pokemon::fromArray($data);
+        return PokemonDto::fromArray($data);
     }
 }

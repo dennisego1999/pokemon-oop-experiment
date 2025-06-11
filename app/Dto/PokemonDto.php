@@ -2,7 +2,7 @@
 
 namespace App\Dto;
 
-class Pokemon {
+class PokemonDto {
     public int|null $id;
     public int|null $weight;
     public int|null $height;
